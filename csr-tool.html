@@ -820,7 +820,7 @@ const SERVICES = {
       {question:"Pets in the home? Anyone with allergies or asthma?",answerType:"single_select",noteLabel:"Pets / allergies",
         options:["Yes — pets","Yes — allergies or asthma","Both","No"]}
     ],
-    pitch:"We have a special — Air Duct Deep Clean for <strong>{price}</strong>. The tech goes vent by vent with a rotary brush, not just suction — then a HEPA vacuum pulls everything out. Full inspection included, warranty covered. {regionalHook} If he finds anything beyond the standard clean, he'll walk you through it before any additional work starts.",
+    pitch:"We have a special — Air Duct Deep Clean for <strong>{price}</strong>. The tech goes vent by vent with a rotary brush, not just suction — then a HEPA vacuum pulls everything out. Full inspection included, warranty covered. If he finds anything beyond the standard clean, he'll walk you through it before any additional work starts.",
     pitchTip:"The rotary brush is the key differentiator — it's mechanical cleaning, not just vacuuming. Lead with that if they're comparing to a cheaper option.",
     bookingTips:[
       {icon:"🛡️", label:"They compare to another company's price", tip:"\"Our $299 includes the inspection and the warranty — that's not standard. Most companies charge separately for those. So the comparison isn't apples to apples.\""},
@@ -3046,7 +3046,6 @@ function renderScript(template){
   const regionalHook = regionalHooks[city] || '';
   return template
     .replace(/{price}/g, priceHtml)
-    .replace(/{regionalHook}/g, regionalHook)
     .replace(/{day1}/g, getNextWeekday(1))
     .replace(/{day2}/g, getNextWeekday(2))
     .replace(/{time}/g, '11am or 2pm');
@@ -3479,6 +3478,7 @@ function renderStep4(){
   }
 
   document.getElementById('step4Body').innerHTML = html;
+  if(state.service==='airDuctDeepClean') updateDCPersonalizationTip();
   // Pre-populate any saved answers
   Object.keys(state.discoveryAnswers).forEach(i=>{
     const inputs = document.querySelectorAll('#step4Body .discovery-block')[i];
@@ -3500,7 +3500,22 @@ function updateDCPersonalizationTip(){
   if(!el) return;
   const answers = (state.discoveryAnswers[0] || '').toLowerCase();
   const city = (state.zipOrCity || '').toLowerCase();
-  if(!answers){ el.style.display='none'; return; }
+  const REGIONAL_DEFAULT = {
+    'kansas city':'"In KC especially, with all the pollen and humidity, dust and allergens build up in the ducts faster than most people realize — worth mentioning if they haven\'t brought it up."',
+    'chicago':'"In Chicago especially, with the heating system running hard all winter — dirty ducts can cut efficiency by 20% or more. Most customers find the cleaning pays for itself in lower energy bills."',
+    'denver':'"In Denver, the dry climate means dust builds up faster than anywhere else — customers here say they can\'t keep up with it."'
+  };
+  if(!answers){
+    const defaultHook = REGIONAL_DEFAULT[city];
+    if(defaultHook){
+      el.style.display='block';
+      el.innerHTML=`<div style="background:#FEF9EC;border:1px solid #E6C84A;border-left:4px solid #D4A017;border-radius:8px;padding:14px 16px">
+        <div style="font:700 11px/1 'DM Sans';color:#7A5500;text-transform:uppercase;letter-spacing:1px;margin-bottom:8px">💬 Optional hook for this area — use naturally:</div>
+        <div style="font:500 15px/1.6 'DM Sans';color:var(--ink)">${defaultHook}</div>
+      </div>`;
+    } else { el.style.display='none'; }
+    return;
+  }
   const DC_HOOKS = {
     allergy:{
       'kansas city':'"Yeah, in KC especially — with all the pollen and the humidity — the ducts just keep recirculating the same stuff all day. That\'s usually where it\'s coming from."',
