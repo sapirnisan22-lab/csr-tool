@@ -261,7 +261,10 @@ mark{background:#FFEB99;color:var(--ink);padding:0 2px;border-radius:2px}
 <body>
 
 <header>
-  <div class="brand">UHS<small>· CSR Discovery</small></div>
+  <div style="display:flex;align-items:center;gap:10px">
+    <button id="globalBackBtn" onclick="goBack()" style="display:none;padding:7px 14px;border-radius:8px;border:1.5px solid var(--gray-light);background:white;font:600 13px/1 'DM Sans';color:var(--ink);cursor:pointer;display:none;align-items:center;gap:5px">← Back</button>
+    <div class="brand">UHS<small>· CSR Discovery</small></div>
+  </div>
   <div class="header-right" id="headerRight" style="display:none">
     <div class="timer" id="callTimer">00:00</div>
     <button class="btn-newcall" onclick="resetCall(true)">New Call</button>
@@ -353,11 +356,7 @@ mark{background:#FFEB99;color:var(--ink);padding:0 2px;border-radius:2px}
       <div style="margin-bottom:16px">
         <div class="field-label" style="margin-bottom:8px">Area</div>
         <div style="display:flex;flex-wrap:wrap;gap:7px">
-          <button type="button" class="lead-city-btn" data-city="Dallas" data-region="texas" onclick="selectLeadCity(this)">Dallas</button>
-          <button type="button" class="lead-city-btn" data-city="Houston" data-region="texas" onclick="selectLeadCity(this)">Houston</button>
-          <button type="button" class="lead-city-btn" data-city="Austin" data-region="texas" onclick="selectLeadCity(this)">Austin</button>
-          <button type="button" class="lead-city-btn" data-city="San Antonio" data-region="texas" onclick="selectLeadCity(this)">San Antonio</button>
-          <button type="button" class="lead-city-btn" data-city="Fort Worth" data-region="texas" onclick="selectLeadCity(this)">Fort Worth</button>
+          <button type="button" class="lead-city-btn" data-city="Texas" data-region="texas" onclick="selectLeadCity(this)">Texas</button>
           <button type="button" class="lead-city-btn" data-city="Kansas City" data-region="midwest" onclick="selectLeadCity(this)">Kansas City</button>
           <button type="button" class="lead-city-btn" data-city="Chicago" data-region="midwest" onclick="selectLeadCity(this)">Chicago</button>
           <button type="button" class="lead-city-btn" data-city="Denver" data-region="midwest" onclick="selectLeadCity(this)">Denver</button>
@@ -403,36 +402,14 @@ mark{background:#FFEB99;color:var(--ink);padding:0 2px;border-radius:2px}
   </div>
 
   <div id="newCustomerQuickInfo" style="display:none;margin-top:16px">
-    <div style="background:#F5FAF5;border:1px solid #7BC47F;border-left:4px solid #2e7d32;border-radius:8px;padding:20px 22px">
-      <div style="font:700 15px/1 'DM Sans';color:var(--ink);margin-bottom:16px">👤 Collect customer info</div>
-      <div style="display:flex;flex-direction:column;gap:12px">
-
-        <div>
-          <div class="field-label" style="margin-bottom:6px">Customer Name</div>
-          <div style="display:flex;gap:8px;align-items:center">
-            <input type="text" id="qiName" class="text-input" style="margin:0;flex:1;background:white" placeholder="First and last name" oninput="state.customer.firstName=this.value.trim()">
-            <button type="button" onclick="toggleQiDecline('qiName','name')" id="qiNameDeclineBtn" style="white-space:nowrap;padding:8px 12px;border-radius:8px;border:1.5px solid var(--gray-light);background:white;font:500 12px/1 'DM Sans';cursor:pointer;color:var(--gray)">Didn't want to provide</button>
-          </div>
-        </div>
-
-        <div>
-          <div class="field-label" style="margin-bottom:6px">Email</div>
-          <div style="display:flex;gap:8px;align-items:center">
-            <input type="email" id="qiEmail" class="text-input" style="margin:0;flex:1;background:white" placeholder="customer@email.com" oninput="state.customer.email=this.value.trim()">
-            <button type="button" onclick="toggleQiDecline('qiEmail','email')" id="qiEmailDeclineBtn" style="white-space:nowrap;padding:8px 12px;border-radius:8px;border:1.5px solid var(--gray-light);background:white;font:500 12px/1 'DM Sans';cursor:pointer;color:var(--gray)">Didn't want to provide</button>
-          </div>
-        </div>
-
-        <div>
-          <div class="field-label" style="margin-bottom:6px">Address</div>
-          <div style="display:flex;gap:8px;align-items:center">
-            <input type="text" id="qiAddress" class="text-input" style="margin:0;flex:1;background:white" placeholder="Street address" oninput="state.customer.address=this.value.trim()">
-            <button type="button" onclick="toggleQiDecline('qiAddress','address')" id="qiAddressDeclineBtn" style="white-space:nowrap;padding:8px 12px;border-radius:8px;border:1.5px solid var(--gray-light);background:white;font:500 12px/1 'DM Sans';cursor:pointer;color:var(--gray)">Didn't want to provide</button>
-          </div>
-        </div>
-
+    <div style="background:#FEF9EC;border:1px solid #E6C84A;border-left:4px solid #D4A017;border-radius:8px;padding:16px 20px">
+      <div style="font:700 13px/1 'DM Sans';color:#7A5500;text-transform:uppercase;letter-spacing:.5px;margin-bottom:10px">📋 ServiceTitan — enter before hanging up</div>
+      <div style="font:400 14px/1.6 'DM Sans';color:var(--ink);margin-bottom:16px">Collect from the customer: <strong>full name, email, and address</strong> — and enter them directly into ServiceTitan before the call ends.</div>
+      <div style="display:flex;align-items:center;gap:10px;cursor:pointer;margin-bottom:14px" onclick="toggleSTCheck()">
+        <div id="stCheck" style="width:22px;height:22px;border-radius:6px;border:2px solid #D4A017;background:white;display:flex;align-items:center;justify-content:center;flex-shrink:0;font:700 14px/1 'DM Sans';color:white;transition:all 160ms"></div>
+        <span style="font:600 14px/1.4 'DM Sans';color:#7A5500">Entered in ServiceTitan</span>
       </div>
-      <button type="button" class="btn-primary" style="width:100%;margin-top:16px" onclick="submitQuickInfo()">Continue →</button>
+      <button id="stDoneBtn" type="button" disabled onclick="submitQuickInfo()" style="width:100%;padding:14px;border-radius:10px;border:none;background:#1A1A1A;font:700 15px/1 'DM Sans';color:white;cursor:not-allowed;opacity:0.35;transition:all 160ms">Continue →</button>
     </div>
   </div>
 
@@ -500,10 +477,7 @@ mark{background:#FFEB99;color:var(--ink);padding:0 2px;border-radius:2px}
 
   <div class="city-group-label">Texas</div>
   <div class="city-grid">
-    <button class="city-btn" data-city="Dallas" data-region="texas" onclick="selectCity(this)">Dallas</button>
-    <button class="city-btn" data-city="Houston" data-region="texas" onclick="selectCity(this)">Houston</button>
-    <button class="city-btn" data-city="San Antonio" data-region="texas" onclick="selectCity(this)">San Antonio</button>
-    <button class="city-btn" data-city="Austin" data-region="texas" onclick="selectCity(this)">Austin</button>
+    <button class="city-btn" data-city="Texas" data-region="texas" onclick="selectCity(this)">Texas</button>
   </div>
 
   <div class="city-group-label" style="margin-top:18px">Midwest</div>
@@ -820,7 +794,7 @@ const SERVICES = {
       {question:"Pets in the home? Anyone with allergies or asthma?",answerType:"single_select",noteLabel:"Pets / allergies",
         options:["Yes — pets","Yes — allergies or asthma","Both","No"]}
     ],
-    pitch:"We have a special — Air Duct Deep Clean for <strong>{price}</strong>. The tech goes vent by vent with a rotary brush, not just suction — then a HEPA vacuum pulls everything out. Full inspection included, warranty covered. {regionalHook} If he finds anything beyond the standard clean, he'll walk you through it before any additional work starts.",
+    pitch:"We have a special — Air Duct Deep Clean for <strong>{price}</strong>. The tech goes vent by vent with a rotary brush, not just suction — then a HEPA vacuum pulls everything out. Full inspection included, warranty covered. If he finds anything beyond the standard clean, he'll walk you through it before any additional work starts.",
     pitchTip:"The rotary brush is the key differentiator — it's mechanical cleaning, not just vacuuming. Lead with that if they're comparing to a cheaper option.",
     bookingTips:[
       {icon:"🛡️", label:"They compare to another company's price", tip:"\"Our $299 includes the inspection and the warranty — that's not standard. Most companies charge separately for those. So the comparison isn't apples to apples.\""},
@@ -1378,6 +1352,8 @@ function cancelCall(){ if(confirm('Cancel this call and return home?')) resetCal
 function resetCall(confirmFirst){
   if(confirmFirst && !confirm('Reset and start a new call?')) return;
   if(state.callTimer) clearInterval(state.callTimer);
+  window.stepHistory = [];
+  updateBackBtn();
   state = newState();
   document.getElementById('headerRight').style.display='none';
   document.getElementById('progressTrack').style.display='none';
@@ -2774,13 +2750,18 @@ function checkQiAutoAdvance(){
     if(allDone) submitQuickInfo();
   }, 80);
 }
+function toggleSTCheck(){
+  const box = document.getElementById('stCheck');
+  const btn = document.getElementById('stDoneBtn');
+  const on = box.dataset.checked === '1';
+  box.dataset.checked = on ? '0' : '1';
+  box.textContent = on ? '' : '✓';
+  box.style.background = on ? 'white' : '#D4A017';
+  btn.disabled = on;
+  btn.style.opacity = on ? '0.35' : '1';
+  btn.style.cursor = on ? 'not-allowed' : 'pointer';
+}
 function submitQuickInfo(){
-  const name = document.getElementById('qiName');
-  const email = document.getElementById('qiEmail');
-  const addr = document.getElementById('qiAddress');
-  if(!name.disabled && name.value.trim()) state.customer.firstName = name.value.trim();
-  if(!email.disabled && email.value.trim()) state.customer.email = email.value.trim();
-  if(!addr.disabled && addr.value.trim()) state.customer.address = addr.value.trim();
   goStep(2);
 }
 function selectCustomerType(type){
@@ -2815,8 +2796,25 @@ function selectCustomerType(type){
   }
 }
 
-function goStep(n){
+window.stepHistory = window.stepHistory || [];
+function goBack(){
+  if(!window.stepHistory.length) return;
+  const prev = window.stepHistory.pop();
+  goStep(prev, true);
+}
+function updateBackBtn(){
+  const btn = document.getElementById('globalBackBtn');
+  if(!btn) return;
+  btn.style.display = window.stepHistory.length > 0 ? 'inline-flex' : 'none';
+}
+function goStep(n, isBack){
+  if(!isBack && state.currentStep !== undefined && state.currentStep !== n
+     && state.currentStep !== 0 && state.currentStep !== 'home'){
+    window.stepHistory.push(state.currentStep);
+  }
+  if(isBack) window.stepHistory = window.stepHistory.filter(s => s !== n);
   state.currentStep = n;
+  updateBackBtn();
   document.querySelectorAll('.step').forEach(s=>s.classList.remove('active'));
   let id;
   if(n==='home' || n===0) id='step-home';
@@ -3046,7 +3044,6 @@ function renderScript(template){
   const regionalHook = regionalHooks[city] || '';
   return template
     .replace(/{price}/g, priceHtml)
-    .replace(/{regionalHook}/g, regionalHook)
     .replace(/{day1}/g, getNextWeekday(1))
     .replace(/{day2}/g, getNextWeekday(2))
     .replace(/{time}/g, '11am or 2pm');
@@ -3479,6 +3476,7 @@ function renderStep4(){
   }
 
   document.getElementById('step4Body').innerHTML = html;
+  if(state.service==='airDuctDeepClean') updateDCPersonalizationTip();
   // Pre-populate any saved answers
   Object.keys(state.discoveryAnswers).forEach(i=>{
     const inputs = document.querySelectorAll('#step4Body .discovery-block')[i];
@@ -3500,7 +3498,22 @@ function updateDCPersonalizationTip(){
   if(!el) return;
   const answers = (state.discoveryAnswers[0] || '').toLowerCase();
   const city = (state.zipOrCity || '').toLowerCase();
-  if(!answers){ el.style.display='none'; return; }
+  const REGIONAL_DEFAULT = {
+    'kansas city':'"You know, in KC especially — with all the humidity and the pollen season — the ducts really do take a beating. It\'s something we see a lot here."',
+    'chicago':'"And honestly, Chicago\'s winters don\'t help — with the heating running hard for months, a lot builds up in there. Customers here usually notice a real difference in their energy bill after a clean."',
+    'denver':'"And in Denver especially — the dry climate means dust builds up way faster than in other cities. Customers here are always surprised by how much was in there."'
+  };
+  if(!answers){
+    const defaultHook = REGIONAL_DEFAULT[city];
+    if(defaultHook){
+      el.style.display='block';
+      el.innerHTML=`<div style="background:#FEF9EC;border:1px solid #E6C84A;border-left:4px solid #D4A017;border-radius:8px;padding:14px 16px">
+        <div style="font:700 11px/1 'DM Sans';color:#7A5500;text-transform:uppercase;letter-spacing:1px;margin-bottom:8px">💬 Optional hook for this area — use naturally:</div>
+        <div style="font:500 15px/1.6 'DM Sans';color:var(--ink)">${defaultHook}</div>
+      </div>`;
+    } else { el.style.display='none'; }
+    return;
+  }
   const DC_HOOKS = {
     allergy:{
       'kansas city':'"Yeah, in KC especially — with all the pollen and the humidity — the ducts just keep recirculating the same stuff all day. That\'s usually where it\'s coming from."',
