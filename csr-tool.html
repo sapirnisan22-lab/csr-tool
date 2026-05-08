@@ -2808,7 +2808,8 @@ function updateBackBtn(){
   btn.style.display = window.stepHistory.length > 0 ? 'inline-flex' : 'none';
 }
 function goStep(n, isBack){
-  if(!isBack && state.currentStep !== undefined && state.currentStep !== n){
+  if(!isBack && state.currentStep !== undefined && state.currentStep !== n
+     && state.currentStep !== 0 && state.currentStep !== 'home'){
     window.stepHistory.push(state.currentStep);
   }
   if(isBack) window.stepHistory = window.stepHistory.filter(s => s !== n);
