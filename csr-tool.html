@@ -3501,9 +3501,9 @@ function updateDCPersonalizationTip(){
   const answers = (state.discoveryAnswers[0] || '').toLowerCase();
   const city = (state.zipOrCity || '').toLowerCase();
   const REGIONAL_DEFAULT = {
-    'kansas city':'"In KC especially, with all the pollen and humidity, dust and allergens build up in the ducts faster than most people realize — worth mentioning if they haven\'t brought it up."',
-    'chicago':'"In Chicago especially, with the heating system running hard all winter — dirty ducts can cut efficiency by 20% or more. Most customers find the cleaning pays for itself in lower energy bills."',
-    'denver':'"In Denver, the dry climate means dust builds up faster than anywhere else — customers here say they can\'t keep up with it."'
+    'kansas city':'"You know, in KC especially — with all the humidity and the pollen season — the ducts really do take a beating. It\'s something we see a lot here."',
+    'chicago':'"And honestly, Chicago\'s winters don\'t help — with the heating running hard for months, a lot builds up in there. Customers here usually notice a real difference in their energy bill after a clean."',
+    'denver':'"And in Denver especially — the dry climate means dust builds up way faster than in other cities. Customers here are always surprised by how much was in there."'
   };
   if(!answers){
     const defaultHook = REGIONAL_DEFAULT[city];
