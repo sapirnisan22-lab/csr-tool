@@ -403,39 +403,9 @@ mark{background:#FFEB99;color:var(--ink);padding:0 2px;border-radius:2px}
   </div>
 
   <div id="newCustomerQuickInfo" style="display:none;margin-top:16px">
-    <div style="background:#F7F7F7;border:1px solid #D0D0D0;border-left:4px solid #A0A0A0;border-radius:8px;padding:20px 22px;opacity:0.85">
-      <div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:14px;flex-wrap:wrap;gap:8px">
-        <div style="font:700 15px/1 'DM Sans';color:#555">👤 Collect customer info</div>
-        <div style="background:#E8E8E8;border:1px solid #C0C0C0;border-radius:20px;padding:5px 12px;font:600 12px/1 'DM Sans';color:#666">📋 Enter in ServiceTitan</div>
-      </div>
-      <div style="display:flex;flex-direction:column;gap:12px">
-
-        <div>
-          <div class="field-label" style="margin-bottom:6px;color:#888">Customer Name</div>
-          <div style="display:flex;gap:8px;align-items:center">
-            <input type="text" id="qiName" class="text-input" style="margin:0;flex:1;background:#EFEFEF;color:#777;border-color:#D0D0D0" placeholder="First and last name" oninput="state.customer.firstName=this.value.trim()">
-            <button type="button" onclick="toggleQiDecline('qiName','name')" id="qiNameDeclineBtn" style="white-space:nowrap;padding:8px 12px;border-radius:8px;border:1.5px solid #D0D0D0;background:#EFEFEF;font:500 12px/1 'DM Sans';cursor:pointer;color:#999">Didn't want to provide</button>
-          </div>
-        </div>
-
-        <div>
-          <div class="field-label" style="margin-bottom:6px;color:#888">Email</div>
-          <div style="display:flex;gap:8px;align-items:center">
-            <input type="email" id="qiEmail" class="text-input" style="margin:0;flex:1;background:#EFEFEF;color:#777;border-color:#D0D0D0" placeholder="customer@email.com" oninput="state.customer.email=this.value.trim()">
-            <button type="button" onclick="toggleQiDecline('qiEmail','email')" id="qiEmailDeclineBtn" style="white-space:nowrap;padding:8px 12px;border-radius:8px;border:1.5px solid #D0D0D0;background:#EFEFEF;font:500 12px/1 'DM Sans';cursor:pointer;color:#999">Didn't want to provide</button>
-          </div>
-        </div>
-
-        <div>
-          <div class="field-label" style="margin-bottom:6px;color:#888">Address</div>
-          <div style="display:flex;gap:8px;align-items:center">
-            <input type="text" id="qiAddress" class="text-input" style="margin:0;flex:1;background:#EFEFEF;color:#777;border-color:#D0D0D0" placeholder="Street address" oninput="state.customer.address=this.value.trim()">
-            <button type="button" onclick="toggleQiDecline('qiAddress','address')" id="qiAddressDeclineBtn" style="white-space:nowrap;padding:8px 12px;border-radius:8px;border:1.5px solid #D0D0D0;background:#EFEFEF;font:500 12px/1 'DM Sans';cursor:pointer;color:#999">Didn't want to provide</button>
-          </div>
-        </div>
-
-      </div>
-      <button type="button" style="width:100%;margin-top:16px;padding:14px;border-radius:10px;border:1.5px solid #C0C0C0;background:#E0E0E0;font:700 15px/1 'DM Sans';color:#777;cursor:pointer" onclick="submitQuickInfo()">Continue →</button>
+    <div style="background:#FEF9EC;border:1px solid #E6C84A;border-left:4px solid #D4A017;border-radius:8px;padding:16px 20px">
+      <div style="font:700 13px/1 'DM Sans';color:#7A5500;text-transform:uppercase;letter-spacing:.5px;margin-bottom:10px">📋 ServiceTitan — enter before hanging up</div>
+      <div style="font:400 14px/1.6 'DM Sans';color:var(--ink)">Collect from the customer: <strong>full name, email, and address</strong> — and enter them directly into ServiceTitan before the call ends.</div>
     </div>
   </div>
 
