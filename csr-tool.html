@@ -261,7 +261,10 @@ mark{background:#FFEB99;color:var(--ink);padding:0 2px;border-radius:2px}
 <body>
 
 <header>
-  <div class="brand">UHS<small>· CSR Discovery</small></div>
+  <div style="display:flex;align-items:center;gap:10px">
+    <button id="globalBackBtn" onclick="goBack()" style="display:none;padding:7px 14px;border-radius:8px;border:1.5px solid var(--gray-light);background:white;font:600 13px/1 'DM Sans';color:var(--ink);cursor:pointer;display:none;align-items:center;gap:5px">← Back</button>
+    <div class="brand">UHS<small>· CSR Discovery</small></div>
+  </div>
   <div class="header-right" id="headerRight" style="display:none">
     <div class="timer" id="callTimer">00:00</div>
     <button class="btn-newcall" onclick="resetCall(true)">New Call</button>
@@ -1349,6 +1352,8 @@ function cancelCall(){ if(confirm('Cancel this call and return home?')) resetCal
 function resetCall(confirmFirst){
   if(confirmFirst && !confirm('Reset and start a new call?')) return;
   if(state.callTimer) clearInterval(state.callTimer);
+  window.stepHistory = [];
+  updateBackBtn();
   state = newState();
   document.getElementById('headerRight').style.display='none';
   document.getElementById('progressTrack').style.display='none';
@@ -2791,8 +2796,24 @@ function selectCustomerType(type){
   }
 }
 
-function goStep(n){
+window.stepHistory = window.stepHistory || [];
+function goBack(){
+  if(!window.stepHistory.length) return;
+  const prev = window.stepHistory.pop();
+  goStep(prev, true);
+}
+function updateBackBtn(){
+  const btn = document.getElementById('globalBackBtn');
+  if(!btn) return;
+  btn.style.display = window.stepHistory.length > 0 ? 'inline-flex' : 'none';
+}
+function goStep(n, isBack){
+  if(!isBack && state.currentStep !== undefined && state.currentStep !== n){
+    window.stepHistory.push(state.currentStep);
+  }
+  if(isBack) window.stepHistory = window.stepHistory.filter(s => s !== n);
   state.currentStep = n;
+  updateBackBtn();
   document.querySelectorAll('.step').forEach(s=>s.classList.remove('active'));
   let id;
   if(n==='home' || n===0) id='step-home';
