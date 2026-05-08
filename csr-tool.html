@@ -405,7 +405,12 @@ mark{background:#FFEB99;color:var(--ink);padding:0 2px;border-radius:2px}
   <div id="newCustomerQuickInfo" style="display:none;margin-top:16px">
     <div style="background:#FEF9EC;border:1px solid #E6C84A;border-left:4px solid #D4A017;border-radius:8px;padding:16px 20px">
       <div style="font:700 13px/1 'DM Sans';color:#7A5500;text-transform:uppercase;letter-spacing:.5px;margin-bottom:10px">📋 ServiceTitan — enter before hanging up</div>
-      <div style="font:400 14px/1.6 'DM Sans';color:var(--ink)">Collect from the customer: <strong>full name, email, and address</strong> — and enter them directly into ServiceTitan before the call ends.</div>
+      <div style="font:400 14px/1.6 'DM Sans';color:var(--ink);margin-bottom:16px">Collect from the customer: <strong>full name, email, and address</strong> — and enter them directly into ServiceTitan before the call ends.</div>
+      <div style="display:flex;align-items:center;gap:10px;cursor:pointer;margin-bottom:14px" onclick="toggleSTCheck()">
+        <div id="stCheck" style="width:22px;height:22px;border-radius:6px;border:2px solid #D4A017;background:white;display:flex;align-items:center;justify-content:center;flex-shrink:0;font:700 14px/1 'DM Sans';color:white;transition:all 160ms"></div>
+        <span style="font:600 14px/1.4 'DM Sans';color:#7A5500">Entered in ServiceTitan</span>
+      </div>
+      <button id="stDoneBtn" type="button" disabled onclick="submitQuickInfo()" style="width:100%;padding:14px;border-radius:10px;border:none;background:#1A1A1A;font:700 15px/1 'DM Sans';color:white;cursor:not-allowed;opacity:0.35;transition:all 160ms">Continue →</button>
     </div>
   </div>
 
@@ -2747,13 +2752,18 @@ function checkQiAutoAdvance(){
     if(allDone) submitQuickInfo();
   }, 80);
 }
+function toggleSTCheck(){
+  const box = document.getElementById('stCheck');
+  const btn = document.getElementById('stDoneBtn');
+  const on = box.dataset.checked === '1';
+  box.dataset.checked = on ? '0' : '1';
+  box.textContent = on ? '' : '✓';
+  box.style.background = on ? 'white' : '#D4A017';
+  btn.disabled = on;
+  btn.style.opacity = on ? '0.35' : '1';
+  btn.style.cursor = on ? 'not-allowed' : 'pointer';
+}
 function submitQuickInfo(){
-  const name = document.getElementById('qiName');
-  const email = document.getElementById('qiEmail');
-  const addr = document.getElementById('qiAddress');
-  if(!name.disabled && name.value.trim()) state.customer.firstName = name.value.trim();
-  if(!email.disabled && email.value.trim()) state.customer.email = email.value.trim();
-  if(!addr.disabled && addr.value.trim()) state.customer.address = addr.value.trim();
   goStep(2);
 }
 function selectCustomerType(type){
