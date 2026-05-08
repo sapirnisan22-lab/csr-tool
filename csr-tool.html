@@ -2906,17 +2906,23 @@ function renderRegionBanner(){
     `Gas FP: ${s.gasFireplace.displayPrice}`
   ].map(t=>`<span class="price-chip">${t}</span>`).join('');
   const warn = reg.managerApprovalRequired;
-  const CITY_TZ = {
-    'Dallas':'America/Chicago','Houston':'America/Chicago','Austin':'America/Chicago',
-    'San Antonio':'America/Chicago','Fort Worth':'America/Chicago',
-    'Kansas City':'America/Chicago','Chicago':'America/Chicago',
-    'Denver':'America/Denver','Salt Lake City':'America/Denver',
-    'Boston':'America/New_York','Phoenix':'America/Phoenix'
+  const CITY_OFFSET = {
+    'Dallas':-5,'Houston':-5,'Austin':-5,'San Antonio':-5,'Fort Worth':-5,
+    'Kansas City':-5,'Chicago':-5,
+    'Denver':-6,'Salt Lake City':-6,
+    'Boston':-4,'Phoenix':-7
   };
-  const REGION_TZ = {texas:'America/Chicago',midwest:'America/Chicago',boston:'America/New_York',utahArizona:'America/Phoenix'};
-  const tz = CITY_TZ[state.zipOrCity] || REGION_TZ[r] || null;
-  let localTime = '';
-  if(tz){ try{ localTime = new Intl.DateTimeFormat('en-US',{timeZone:tz,hour:'numeric',minute:'2-digit',hour12:true}).format(new Date()); }catch(e){} }
+  const REGION_OFFSET = {texas:-5,midwest:-5,boston:-4,utahArizona:-7};
+  function usLocalTime(offsetHours){
+    const now = new Date();
+    const utcMs = now.getTime() + now.getTimezoneOffset()*60000;
+    const d = new Date(utcMs + offsetHours*3600000);
+    let h = d.getUTCHours(), m = d.getUTCMinutes().toString().padStart(2,'0');
+    const ampm = h>=12?'PM':'AM'; h = h%12||12;
+    return h+':'+m+' '+ampm;
+  }
+  const offset = CITY_OFFSET[state.zipOrCity] !== undefined ? CITY_OFFSET[state.zipOrCity] : (REGION_OFFSET[r] !== undefined ? REGION_OFFSET[r] : null);
+  const localTime = offset !== null ? usLocalTime(offset) : '';
   const cityLabel = state.zipOrCity || reg.displayName;
   const timeChip = localTime ? `<span style="font:600 13px/1 'DM Sans';color:var(--ink);background:rgba(255,255,255,0.6);border-radius:20px;padding:3px 10px">🕐 ${localTime}</span>` : '';
   banner.className = 'region-banner' + (warn?' warn':'');
