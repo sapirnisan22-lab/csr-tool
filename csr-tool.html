@@ -2491,60 +2491,69 @@ function renderComplaintPanel(){
   if(!panel) return;
   panel.style.display='block';
 
-  panel.innerHTML =
-    '<div class="script-box" style="margin-bottom:14px">' +
-      '<div class="script-label">SAY THIS FIRST — DE-ESCALATE</div>' +
-      '<div class="script-text">"I\'m really sorry to hear that — that\'s not the experience we want you to have. I want to make sure this gets taken care of properly. Can you walk me through what happened?"</div>' +
-    '</div>' +
-
-    '<div style="background:#FEF9EC;border:1px solid #E6C84A;border-left:4px solid #D4A017;border-radius:8px;padding:14px 18px;margin-bottom:14px;font:400 13px/1.7 \'DM Sans\';color:#7A5500">' +
-      '<strong>&#x1F4A1; While the customer talks:</strong> Let them finish. Do NOT interrupt or defend. Say <em>"I understand"</em> or <em>"I hear you"</em> once or twice — never argue. Write down the key complaint.' +
-    '</div>' +
-
-    '<div style="background:white;border:1px solid var(--gold-light);border-radius:10px;padding:18px 20px;margin-bottom:14px">' +
-      '<div style="font:700 13px/1 \'DM Sans\';color:var(--ink);margin-bottom:14px">&#x26A0;&#xFE0F; Type of complaint</div>' +
-      '<div style="display:grid;gap:10px">' +
-
-        '<div style="border:1.5px solid #E6C84A;border-radius:8px;padding:13px 16px;background:#FEF9EC">' +
-          '<div style="font:700 13px/1 \'DM Sans\';color:#7A5500;margin-bottom:5px">🔧 Quality of work</div>' +
-          '<div style="font:400 12px/1.6 \'DM Sans\';color:#7A5500;margin-bottom:8px">Customer unhappy with how the service was done, or says the problem wasn\'t resolved.</div>' +
-          '<div style="font:italic 400 13px/1.5 \'Fraunces\',serif;color:#7A5500">"I completely understand — you deserve to be 100% satisfied with the work. I\'m going to create a recall so our tech can come back and make it right, at no charge to you."</div>' +
-        '</div>' +
-
-        '<div style="border:1.5px solid #C8DBEF;border-radius:8px;padding:13px 16px;background:var(--blue-soft)">' +
-          '<div style="font:700 13px/1 \'DM Sans\';color:#1F5582;margin-bottom:5px">💳 Billing or pricing dispute</div>' +
-          '<div style="font:400 12px/1.6 \'DM Sans\';color:#1F5582;margin-bottom:8px">Customer was charged differently than expected, or questions an invoice.</div>' +
-          '<div style="font:italic 400 13px/1.5 \'Fraunces\',serif;color:#1F5582">"I want to look into this right now — can I put you on a brief hold while I pull up your invoice? I want to make sure everything is correct."</div>' +
-        '</div>' +
-
-        '<div style="border:1.5px solid #F4BFBF;border-radius:8px;padding:13px 16px;background:var(--red-soft)">' +
-          '<div style="font:700 13px/1 \'DM Sans\';color:var(--red);margin-bottom:5px">😤 Tech behavior or attitude</div>' +
-          '<div style="font:400 12px/1.6 \'DM Sans\';color:var(--red);margin-bottom:8px">Customer had a bad interaction with a technician.</div>' +
-          '<div style="font:italic 400 13px/1.5 \'Fraunces\',serif;color:var(--red)">"I sincerely apologize for that — that is not acceptable and I take it very seriously. I\'m going to flag this to my manager right now."</div>' +
-        '</div>' +
-
-      '</div>' +
-    '</div>' +
-
-    '<div style="background:white;border:1px solid var(--gold-light);border-radius:8px;padding:16px 18px;margin-bottom:14px">' +
-      '<div style="font:700 13px/1 \'DM Sans\';color:var(--ink);margin-bottom:10px">&#x1F4BB; ServiceTitan — steps</div>' +
-      '<ol style="margin:0;padding-left:20px;font:400 13px/2 \'DM Sans\';color:var(--ink)">' +
-        '<li>Open the customer\'s job</li>' +
-        '<li><strong>History</strong> → Leave a note: describe the complaint in full</li>' +
-        '<li>Add tag: <span style="background:#c0392b;color:white;padding:2px 8px;border-radius:4px;font:700 11px/1 \'DM Sans\'">Complaint</span></li>' +
-        '<li>If recall needed — create a new <strong>Recall Job</strong> linked to the original</li>' +
-        '<li>If billing issue — screenshot the invoice and send to the office group</li>' +
-        '<li>If manager required — log: <em>"Manager requested — [time] — reason: [reason]"</em></li>' +
-      '</ol>' +
-    '</div>' +
-
-    '<div style="background:#FCE8E8;border:1px solid #B22222;border-left:4px solid #B22222;border-radius:8px;padding:14px 18px;font:400 13px/1.7 \'DM Sans\';color:#7A0000">' +
-      '<strong>&#x1F6A8; Always escalate to manager if:</strong><br>' +
-      '• Customer is threatening a chargeback or legal action<br>' +
-      '• Customer mentions leaving a negative review on Google / Yelp<br>' +
-      '• Complaint involves tech behavior (not just work quality)<br>' +
-      '• You cannot resolve it in under 5 minutes' +
+  var closingLine =
+    '<div style="background:#FCE8E8;border:1px solid #B22222;border-left:4px solid #B22222;border-radius:8px;padding:16px 18px;margin-top:14px">' +
+      '<div style="font:700 12px/1 \'DM Sans\';color:#7A0000;text-transform:uppercase;letter-spacing:.5px;margin-bottom:8px">🔚 סיום — תמיד לאמר</div>' +
+      '<div style="font:italic 400 17px/1.5 \'Fraunces\',serif;color:#7A0000">"השיחות שלנו מוקלטות והמקרה שלך יועבר לבדיקה. מנהל של הטכנאי יבדוק איתו כרגע את הסיטואציה ונחזור אליך בדקות הקרובות להמשך טיפול."</div>' +
     '</div>';
+
+  var COMPLAINT_SCRIPTS = {
+    airDuctMaintenance: {
+      label: '🌀 Air Duct Maintenance',
+      note: 'לקוח טוען שניקינו רק עם HEPA ולא הכל',
+      script: 'אנחנו משתמשים בשואב מה-Main Supply. במהלך השיחה שלנו נציג לא יכול לדעת את ה-Condition — וזאת הסיבה שהשירות שלנו כולל גם בדיקה כללית של כל המערכת. אנחנו מציעים אחריות על כל ניקוי שלנו, ואני יכולה להבטיח לך שהטכנאי שנמצא אצלך הוא אחד המובילים שלנו — לאור הרבה ביקורות טובות שהוא מקבל מהלקוחות. מה נוכל לעשות בשבילך כדי שחוויית השירות שלך תהפוך לטובה יותר?'
+    },
+    dryerVent: {
+      label: '🌀 Dryer Vent',
+      note: 'לקוח טוען שהמחיר שונה ממה שנאמר בשיחה',
+      script: 'לאחר בדיקה של הפייל שלך, אני רואה שהטכנאי המליץ על ניקוי עמוק. במהלך השיחה הקודמת עם הנציג עדכנת שהוונט לא נוקה המון זמן — ולאור זה נוצרה השפעה ישירה על הוונט ונדרש ניקוי עמוק. אנו תמיד שואפים להיות שקופים עם הלקוחות שלנו ב-100%, ולא נרצה להציע עבודה במחיר מוזל שלא תיתן לך את המענה הנדרש.'
+    },
+    consultation: {
+      label: '🔍 Consultation — $39/vent',
+      note: 'לקוח טוען שהטכנאי אמר מחיר שונה מ-$39 לוונט',
+      script: 'המחיר הבסיסי הוא $39 לוונט — זאת בדיוק הסיבה שאנחנו עושים Free Consultation. אנחנו עומדים מאחורי סטנדרט ניקיון ומעל 23 שנה בתחום. הטכנאי שאצלך הוא אחד המובילים בחברה לאור ביקורות חיוביות רבות שהוא מקבל ועל איכות עבודתו ללא פשרות. (אם יש הצעת מחיר) — אני רואה שהוא המליץ על ניקוי של המערכת כולה ונתן לך מחיר כללי להכל. תוכלי להמתין איתי על הקו — אבדוק עם מנהל מה נוכל לעשות כדי להפוך את החוויה שלך למרוצה.'
+    },
+    deepClean: {
+      label: '💨 Deep Clean — $299',
+      note: 'לקוח טוען שלא ידע שזה עד 10 vents בלבד',
+      script: 'המחיר של $299 כולל עד 10 vents. אנחנו תמיד מסבירים שהמחיר הסופי ינתן רק לאחר שהטכנאי בודק את המערכת בפועל. אם יש הצעת מחיר — אני בודקת עכשיו מה כתוב בה. אם יש משהו מעבר למה שסוכם — מנהל יטפל בזה ישירות.'
+    }
+  };
+
+  var btns = Object.keys(COMPLAINT_SCRIPTS).map(function(key){
+    var c = COMPLAINT_SCRIPTS[key];
+    return '<button onclick="showComplaintScript(\''+key+'\')" style="width:100%;text-align:left;padding:14px 16px;border-radius:8px;border:2px solid var(--gray-light);background:white;font:600 14px/1.3 \'DM Sans\';color:var(--ink);cursor:pointer;transition:all 160ms;margin-bottom:8px" id="cmpBtn_'+key+'">' +
+      '<div>'+c.label+'</div>' +
+      '<div style="font:400 12px/1.4 \'DM Sans\';color:var(--gray);margin-top:3px">'+c.note+'</div>' +
+    '</button>';
+  }).join('');
+
+  panel.innerHTML =
+    '<div style="font:700 13px/1 \'DM Sans\';color:var(--ink);margin-bottom:12px">על איזה שירות התלונה?</div>' +
+    btns +
+    '<div id="complaintScriptPanel" style="display:none;margin-top:6px"></div>';
+
+  window._complaintScripts = COMPLAINT_SCRIPTS;
+  window._complaintClosing = closingLine;
+}
+
+function showComplaintScript(key){
+  var c = window._complaintScripts[key];
+  if(!c) return;
+  // Highlight selected button
+  Object.keys(window._complaintScripts).forEach(function(k){
+    var b = document.getElementById('cmpBtn_'+k);
+    if(b){ b.style.borderColor = k===key ? 'var(--gold-dark)' : 'var(--gray-light)'; b.style.background = k===key ? 'var(--paper-warm)' : 'white'; }
+  });
+  var sp = document.getElementById('complaintScriptPanel');
+  if(!sp) return;
+  sp.style.display='block';
+  sp.innerHTML =
+    '<div class="script-box" style="margin-bottom:0">' +
+      '<div class="script-label">SAY THIS</div>' +
+      '<div class="script-text">"'+c.script+'"</div>' +
+    '</div>' +
+    window._complaintClosing;
 }
 
 function selectExistingScenario(key, btn){
