@@ -2500,23 +2500,10 @@ function renderComplaintPanel(){
   var COMPLAINT_SCRIPTS = {
     airDuctMaintenance: {
       label: '🌀 Air Duct Maintenance',
-      note: 'Customer complaint about the service or pricing',
-      subScenarios: [
-        {
-          label: 'Customer got Maintenance only — declined Deep Clean',
-          note: 'Tech recommended a Deep Clean, customer said no, now calling to complain',
-          script: 'Our technician performed the full Maintenance service as booked — using a professional Main Supply vacuum system that cleans the loose dust from the main line. During the visit, he assessed the system and recommended a Deep Clean due to the level of buildup, and provided you with a quote. That recommendation was declined, and the Maintenance was completed as agreed. The service you booked was delivered in full.',
-          scriptNote: 'If customer is pushing for a refund — do NOT engage on price. Say:',
-          scriptExtra: 'I completely understand your frustration. I\'m going to flag this for the manager who will review the full visit — including the technician\'s notes and photos — and call you back within 24 hours.'
-        },
-        {
-          label: 'Customer got both Maintenance + Deep Clean',
-          note: 'Customer is complaining about quality after getting the full service',
-          script: 'We use a Main Supply vacuum system — a professional-grade machine that cleans the loose dust from the main line. I\'d like to pull up the technician\'s photos right now so we can go over exactly what was done together.',
-          scriptNote: 'Pull up the job in ServiceTitan → check photos uploaded by the tech, then say:',
-          scriptExtra: 'I can see the technician who visited you documented the full cleaning with before and after photos. I\'m going to walk you through what was done — and if anything wasn\'t completed to standard, the manager will make it right.'
-        }
-      ]
+      note: 'Tech recommended a Deep Clean, customer declined, now calling to complain',
+      script: 'Our technician performed the full Maintenance service as booked — using a professional Main Supply vacuum system that cleans the loose dust from the main line. During the visit, he assessed the system and recommended a Deep Clean due to the level of buildup, and provided you with a quote. That recommendation was declined, and the Maintenance was completed as agreed. The service you booked was delivered in full.',
+      scriptNote: 'If customer is pushing for a refund — do NOT engage on price. Say:',
+      scriptExtra: 'I completely understand your frustration. I\'m going to flag this for the manager who will review the full visit — including the technician\'s notes and photos — and call you back within 24 hours.'
     },
     dryerVent: {
       label: '🌀 Dryer Vent',
