@@ -2537,8 +2537,15 @@ function renderComplaintPanel(){
     btns +
     '<div id="complaintScriptPanel" style="display:none;margin-top:6px"></div>';
 
+  var reviewLine =
+    '<div style="background:#FFF3CD;border:1px solid #E6A817;border-left:4px solid #D4A017;border-radius:8px;padding:16px 18px;margin-top:10px">' +
+      '<div style="font:700 12px/1 \'DM Sans\';color:#7A5500;text-transform:uppercase;letter-spacing:.8px;margin-bottom:8px">⚠️ If customer mentions a bad review — say this</div>' +
+      '<div style="font:italic 400 17px/1.5 \'Fraunces\',serif;color:var(--ink)">"I really appreciate you telling me directly instead of going online — that means a lot. I want to make sure this is fully resolved. The manager will call you back within the next 24 hours."</div>' +
+    '</div>';
+
   window._complaintScripts = COMPLAINT_SCRIPTS;
   window._complaintClosing = closingLine;
+  window._complaintReviewLine = reviewLine;
 }
 
 function showComplaintScript(key){
@@ -2567,6 +2574,7 @@ function showComplaintScript(key){
       '<div class="script-text">"'+c.script+'"</div>' +
     '</div>' +
     extraHtml +
+    window._complaintReviewLine +
     window._complaintClosing;
 }
 
