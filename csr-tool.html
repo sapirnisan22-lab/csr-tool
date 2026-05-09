@@ -2511,7 +2511,9 @@ function renderComplaintPanel(){
     consultation: {
       label: '🔍 Consultation — $39/vent',
       note: 'Customer says tech quoted more than $39/vent',
-      script: 'The base price is $39 per vent — and that\'s exactly why we offer a free consultation. We hold ourselves to the highest cleaning standards with over 23 years in the industry. The technician at your home is one of our top-rated, based on consistent positive reviews and his commitment to quality work. (If there is an estimate) — I can see he recommended a full system cleaning and gave you an all-inclusive price. Can you hold for a moment while I check with the manager on what we can do to make sure you leave satisfied?'
+      script: 'The base price is $39 per vent — and that\'s exactly why we offer a free consultation. We hold ourselves to the highest cleaning standards with over 23 years in the industry. The technician at your home is one of our top-rated, based on consistent positive reviews and his commitment to quality work.',
+      scriptNote: 'If there is an estimate on file — check it first, then say:',
+      scriptExtra: 'I can see he recommended a full system cleaning and gave you an all-inclusive price. Can you hold for a moment while I check with the manager on what we can do to make sure you leave satisfied?'
     },
     deepClean: {
       label: '💨 Deep Clean — $299',
@@ -2548,11 +2550,21 @@ function showComplaintScript(key){
   var sp = document.getElementById('complaintScriptPanel');
   if(!sp) return;
   sp.style.display='block';
+  var extraHtml = '';
+  if(c.scriptNote && c.scriptExtra){
+    extraHtml =
+      '<div style="background:#E8F0FB;border:1px solid #9DB8E8;border-left:4px solid #3B6CC5;border-radius:8px;padding:12px 16px;margin-top:10px">' +
+        '<div style="font:700 11px/1 \'DM Sans\';color:#1F3F8A;text-transform:uppercase;letter-spacing:.8px;margin-bottom:7px">📋 CSR — check first, then say:</div>' +
+        '<div style="font:400 12px/1.5 \'DM Sans\';color:#1F3F8A;margin-bottom:10px">'+c.scriptNote+'</div>' +
+        '<div style="font:italic 400 17px/1.5 \'Fraunces\',serif;color:var(--ink)">"'+c.scriptExtra+'"</div>' +
+      '</div>';
+  }
   sp.innerHTML =
     '<div class="script-box" style="margin-bottom:0">' +
       '<div class="script-label">SAY THIS</div>' +
       '<div class="script-text">"'+c.script+'"</div>' +
     '</div>' +
+    extraHtml +
     window._complaintClosing;
 }
 
