@@ -2438,51 +2438,9 @@ function renderTechOnSitePanel(){
   panel.style.display='block';
 
   panel.innerHTML =
-    '<div class="script-box" style="margin-bottom:14px">' +
-      '<div class="script-label">SAY THIS — OPENING</div>' +
-      '<div class="script-text">"Thank you for calling United Home Services! I see we currently have a technician with you — how can I help?"</div>' +
-    '</div>' +
-
-    '<div style="background:white;border:1px solid var(--gold-light);border-radius:10px;padding:18px 20px;margin-bottom:14px">' +
-      '<div style="font:700 13px/1 \'DM Sans\';color:var(--ink);margin-bottom:14px">&#x1F6A6; What is the call about?</div>' +
-      '<div style="display:grid;grid-template-columns:1fr 1fr;gap:10px">' +
-
-        '<div style="border:1.5px solid #7BC47F;border-radius:8px;padding:14px 16px;background:#EBF7ED">' +
-          '<div style="font:700 13px/1.3 \'DM Sans\';color:#1A5C20;margin-bottom:6px">✅ Tech recommends extra work</div>' +
-          '<div style="font:400 12px/1.6 \'DM Sans\';color:#1b4d1d">The tech found something and needs customer approval before proceeding.</div>' +
-          '<div style="margin-top:10px;padding-top:10px;border-top:1px solid #a5d6a7;font:italic 400 13px/1.5 \'Fraunces\',serif;color:#1A5C20">"Absolutely — our tech is trained to walk you through exactly what he found before doing anything additional. You\'re always in control."</div>' +
-        '</div>' +
-
-        '<div style="border:1.5px solid #E6C84A;border-radius:8px;padding:14px 16px;background:#FEF9EC">' +
-          '<div style="font:700 13px/1.3 \'DM Sans\';color:#7A5500;margin-bottom:6px">❓ Customer has a question</div>' +
-          '<div style="font:400 12px/1.6 \'DM Sans\';color:#7A5500">Customer wants to understand what the tech is doing or what was found.</div>' +
-          '<div style="margin-top:10px;padding-top:10px;border-top:1px solid #E6C84A;font:italic 400 13px/1.5 \'Fraunces\',serif;color:#7A5500">"Of course — let me help clarify. Can you tell me exactly what the tech showed you?"</div>' +
-        '</div>' +
-
-        '<div style="border:1.5px solid #C8DBEF;border-radius:8px;padding:14px 16px;background:var(--blue-soft)">' +
-          '<div style="font:700 13px/1.3 \'DM Sans\';color:#1F5582;margin-bottom:6px">➕ Customer wants to add a service</div>' +
-          '<div style="font:400 12px/1.6 \'DM Sans\';color:#1F5582">Tech is on site and customer wants to book an additional service.</div>' +
-          '<div style="margin-top:10px;padding-top:10px;border-top:1px solid #C8DBEF;font:italic 400 13px/1.5 \'Fraunces\',serif;color:#1F5582">"Wonderful — let me check availability and pricing for you right now."</div>' +
-        '</div>' +
-
-        '<div style="border:1.5px solid #F4BFBF;border-radius:8px;padding:14px 16px;background:var(--red-soft)">' +
-          '<div style="font:700 13px/1.3 \'DM Sans\';color:var(--red);margin-bottom:6px">😠 Customer unhappy with tech</div>' +
-          '<div style="font:400 12px/1.6 \'DM Sans\';color:var(--red)">Customer is upset about something the tech said or did.</div>' +
-          '<div style="margin-top:10px;padding-top:10px;border-top:1px solid #f4bfbf;font:italic 400 13px/1.5 \'Fraunces\',serif;color:var(--red)">"I\'m sorry to hear that — I want to make this right. Can you tell me what happened? I\'m going to loop in my manager immediately."</div>' +
-        '</div>' +
-
-      '</div>' +
-    '</div>' +
-
-    '<div style="background:white;border:1px solid var(--gold-light);border-radius:8px;padding:16px 18px;margin-bottom:14px">' +
-      '<div style="font:700 13px/1 \'DM Sans\';color:var(--ink);margin-bottom:10px">&#x1F4BB; ServiceTitan — log this call</div>' +
-      '<ol style="margin:0;padding-left:20px;font:400 13px/2 \'DM Sans\';color:var(--ink)">' +
-        '<li>Open the active job for this customer</li>' +
-        '<li>Go to <strong>History</strong> → click <em>Leave a note…</em></li>' +
-        '<li>Log: what the customer called about, what you told them, any decisions made</li>' +
-        '<li>If extra work was approved — update the invoice before the tech leaves</li>' +
-        '<li>If escalated to manager — add note: <em>"Manager contacted — [time]"</em></li>' +
-      '</ol>' +
+    '<div class="script-box">' +
+      '<div class="script-label">SAY THIS</div>' +
+      '<div class="script-text">"I can see you have a technician with you right now — the manager will contact him immediately to make sure you\'re taken care of. Thank you so much, goodbye!"</div>' +
     '</div>';
 }
 
