@@ -2493,30 +2493,30 @@ function renderComplaintPanel(){
 
   var closingLine =
     '<div style="background:#FCE8E8;border:1px solid #B22222;border-left:4px solid #B22222;border-radius:8px;padding:16px 18px;margin-top:14px">' +
-      '<div style="font:700 12px/1 \'DM Sans\';color:#7A0000;text-transform:uppercase;letter-spacing:.5px;margin-bottom:8px">🔚 סיום — תמיד לאמר</div>' +
-      '<div style="font:italic 400 17px/1.5 \'Fraunces\',serif;color:#7A0000">"השיחות שלנו מוקלטות והמקרה שלך יועבר לבדיקה. מנהל של הטכנאי יבדוק איתו כרגע את הסיטואציה ונחזור אליך בדקות הקרובות להמשך טיפול."</div>' +
+      '<div style="font:700 12px/1 \'DM Sans\';color:#7A0000;text-transform:uppercase;letter-spacing:.5px;margin-bottom:8px">🔚 Always close with this</div>' +
+      '<div style="font:italic 400 17px/1.5 \'Fraunces\',serif;color:#7A0000">"Our calls are recorded and your case will be reviewed. The tech\'s manager is looking into the situation right now — we\'ll call you back shortly to follow up."</div>' +
     '</div>';
 
   var COMPLAINT_SCRIPTS = {
     airDuctMaintenance: {
       label: '🌀 Air Duct Maintenance',
-      note: 'לקוח טוען שניקינו רק עם HEPA ולא הכל',
-      script: 'אנחנו משתמשים בשואב מה-Main Supply. במהלך השיחה שלנו נציג לא יכול לדעת את ה-Condition — וזאת הסיבה שהשירות שלנו כולל גם בדיקה כללית של כל המערכת. אנחנו מציעים אחריות על כל ניקוי שלנו, ואני יכולה להבטיח לך שהטכנאי שנמצא אצלך הוא אחד המובילים שלנו — לאור הרבה ביקורות טובות שהוא מקבל מהלקוחות. מה נוכל לעשות בשבילך כדי שחוויית השירות שלך תהפוך לטובה יותר?'
+      note: 'Customer says we only used HEPA vacuum — didn\'t clean everything',
+      script: 'We use a Main Supply vacuum system. On the phone, our rep cannot assess the full condition of your system — that\'s exactly why our service includes a complete inspection of the entire system, not just suction. We stand behind every cleaning with a warranty. I can assure you that the technician with you today is one of our top performers — he consistently receives excellent reviews from our customers. What can we do to turn your experience around?'
     },
     dryerVent: {
       label: '🌀 Dryer Vent',
-      note: 'לקוח טוען שהמחיר שונה ממה שנאמר בשיחה',
-      script: 'לאחר בדיקה של הפייל שלך, אני רואה שהטכנאי המליץ על ניקוי עמוק. במהלך השיחה הקודמת עם הנציג עדכנת שהוונט לא נוקה המון זמן — ולאור זה נוצרה השפעה ישירה על הוונט ונדרש ניקוי עמוק. אנו תמיד שואפים להיות שקופים עם הלקוחות שלנו ב-100%, ולא נרצה להציע עבודה במחיר מוזל שלא תיתן לך את המענה הנדרש.'
+      note: 'Customer says the price is different from what they were quoted',
+      script: 'After reviewing your file, I can see that our technician recommended a deep clean. During your previous call, you mentioned the vent hadn\'t been cleaned in a long time — that directly affects the condition of the vent and requires a deeper clean. We always aim to be 100% transparent with our customers. We would never recommend work at a reduced price that doesn\'t actually solve the problem.'
     },
     consultation: {
       label: '🔍 Consultation — $39/vent',
-      note: 'לקוח טוען שהטכנאי אמר מחיר שונה מ-$39 לוונט',
-      script: 'המחיר הבסיסי הוא $39 לוונט — זאת בדיוק הסיבה שאנחנו עושים Free Consultation. אנחנו עומדים מאחורי סטנדרט ניקיון ומעל 23 שנה בתחום. הטכנאי שאצלך הוא אחד המובילים בחברה לאור ביקורות חיוביות רבות שהוא מקבל ועל איכות עבודתו ללא פשרות. (אם יש הצעת מחיר) — אני רואה שהוא המליץ על ניקוי של המערכת כולה ונתן לך מחיר כללי להכל. תוכלי להמתין איתי על הקו — אבדוק עם מנהל מה נוכל לעשות כדי להפוך את החוויה שלך למרוצה.'
+      note: 'Customer says tech quoted more than $39/vent',
+      script: 'The base price is $39 per vent — and that\'s exactly why we offer a free consultation. We hold ourselves to the highest cleaning standards with over 23 years in the industry. The technician at your home is one of our top-rated, based on consistent positive reviews and his commitment to quality work. (If there is an estimate) — I can see he recommended a full system cleaning and gave you an all-inclusive price. Can you hold for a moment while I check with the manager on what we can do to make sure you leave satisfied?'
     },
     deepClean: {
       label: '💨 Deep Clean — $299',
-      note: 'לקוח טוען שלא ידע שזה עד 10 vents בלבד',
-      script: 'המחיר של $299 כולל עד 10 vents. אנחנו תמיד מסבירים שהמחיר הסופי ינתן רק לאחר שהטכנאי בודק את המערכת בפועל. אם יש הצעת מחיר — אני בודקת עכשיו מה כתוב בה. אם יש משהו מעבר למה שסוכם — מנהל יטפל בזה ישירות.'
+      note: 'Customer says they weren\'t told the $299 only covers up to 10 vents',
+      script: 'The $299 price covers up to 10 vents. We always explain that the final price is confirmed after the technician inspects the system on site. If there is an estimate — let me pull it up right now and go over exactly what\'s listed. If there\'s anything beyond what was agreed, the manager will handle that directly.'
     }
   };
 
@@ -2529,7 +2529,7 @@ function renderComplaintPanel(){
   }).join('');
 
   panel.innerHTML =
-    '<div style="font:700 13px/1 \'DM Sans\';color:var(--ink);margin-bottom:12px">על איזה שירות התלונה?</div>' +
+    '<div style="font:700 13px/1 \'DM Sans\';color:var(--ink);margin-bottom:12px">What is the complaint about?</div>' +
     btns +
     '<div id="complaintScriptPanel" style="display:none;margin-top:6px"></div>';
 
