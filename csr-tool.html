@@ -384,7 +384,7 @@ mark{background:#FFEB99;color:var(--ink);padding:0 2px;border-radius:2px}
           <option value="chimneySweep">Chimney Sweep</option>
           <option value="chimneyRepair">Chimney Repair</option>
           <option value="gasFireplace">Gas Fireplace</option>
-          <option value="insulation">Insulation</option>
+          <option value="insulation">Insulation (Dallas only)</option>
         </select>
       </div>
       <div style="margin-bottom:14px">
@@ -1463,6 +1463,12 @@ function selectLeadCity(btn){
     const isBoston = region === 'boston';
     maintOpt.style.display = isBoston ? 'none' : '';
     if(isBoston && svc.value === 'airDuctMaintenance') svc.value = '';
+  }
+  const insulationOpt = document.querySelector('#leadServiceSelect option[value="insulation"]');
+  if(insulationOpt){
+    const isTexas = region === 'texas';
+    insulationOpt.style.display = isTexas ? '' : 'none';
+    if(!isTexas && svc.value === 'insulation') svc.value = '';
   }
   checkLeadReady();
 }
