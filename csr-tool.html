@@ -1450,13 +1450,19 @@ function selectLeadCity(btn){
   btn.classList.add('selected');
   window.leadCity = btn.dataset.city;
   window.leadRegion = btn.dataset.region;
+  const region = btn.dataset.region;
+  const svc = document.getElementById('leadServiceSelect');
   const deepCleanOpt = document.querySelector('#leadServiceSelect option[value="airDuctDeepClean"]');
+  const maintOpt = document.querySelector('#leadServiceSelect option[value="airDuctMaintenance"]');
   if(deepCleanOpt){
-    const isMidwest = btn.dataset.region === 'midwest';
+    const isMidwest = region === 'midwest';
     deepCleanOpt.style.display = isMidwest ? '' : 'none';
-    if(!isMidwest && document.getElementById('leadServiceSelect').value === 'airDuctDeepClean'){
-      document.getElementById('leadServiceSelect').value = '';
-    }
+    if(!isMidwest && svc.value === 'airDuctDeepClean') svc.value = '';
+  }
+  if(maintOpt){
+    const isBoston = region === 'boston';
+    maintOpt.style.display = isBoston ? 'none' : '';
+    if(isBoston && svc.value === 'airDuctMaintenance') svc.value = '';
   }
   checkLeadReady();
 }
