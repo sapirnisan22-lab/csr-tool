@@ -1450,6 +1450,14 @@ function selectLeadCity(btn){
   btn.classList.add('selected');
   window.leadCity = btn.dataset.city;
   window.leadRegion = btn.dataset.region;
+  const deepCleanOpt = document.querySelector('#leadServiceSelect option[value="airDuctDeepClean"]');
+  if(deepCleanOpt){
+    const isMidwest = btn.dataset.region === 'midwest';
+    deepCleanOpt.style.display = isMidwest ? '' : 'none';
+    if(!isMidwest && document.getElementById('leadServiceSelect').value === 'airDuctDeepClean'){
+      document.getElementById('leadServiceSelect').value = '';
+    }
+  }
   checkLeadReady();
 }
 // RECALL — full interactive flow
