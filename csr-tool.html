@@ -1026,7 +1026,7 @@ const BRANCH_ADDRESSES = {
   'Kansas City': { phone: '(913) 374-7078', addresses: ['12441 W 119th St #1222, Overland Park, KS 66213'] },
   'Chicago':     { phone: '(630) 332-2302', addresses: ['100 Saunders Rd, Suite 150, Lake Forest, IL 60045'] },
   'Denver':      { phone: null, addresses: ['Cherry Creek, Denver, CO 80206'] },
-  'Boston':      { phone: null, addresses: ['Back Bay, Boston, MA 02116'] },
+  'Boston':      { phone: null, addresses: ['74 Corey Rd, Brighton, MA 02135'] },
   'Phoenix':     { phone: null, addresses: ['Scottsdale, AZ 85251'] },
   'Salt Lake City': { phone: null, addresses: ['Sugar House, Salt Lake City, UT 84106'] },
 };
@@ -3096,12 +3096,10 @@ function renderRegionBanner(){
   const tz = CITY_TZ[state.zipOrCity] || REGION_TZ[r] || null;
   let localTime = '';
   if(tz){ try{ localTime = new Intl.DateTimeFormat('en-US',{timeZone:tz,hour:'numeric',minute:'2-digit',hour12:true}).format(new Date()); }catch(e){} }
-  const OFFICE_ADDRESS = { boston: '74 Corey Rd, Brighton, MA 02135' };
   const cityLabel = state.zipOrCity || reg.displayName;
   const timeChip = localTime ? `<span style="font:600 13px/1 'DM Sans';color:var(--ink);background:rgba(255,255,255,0.6);border-radius:20px;padding:3px 10px">🕐 ${localTime}</span>` : '';
-  const addressChip = OFFICE_ADDRESS[r] ? `<span style="font:500 12px/1 'DM Sans';color:var(--ink-soft);background:rgba(255,255,255,0.6);border-radius:20px;padding:3px 10px">📬 ${OFFICE_ADDRESS[r]}</span>` : '';
   banner.className = 'region-banner' + (warn?' warn':'');
-  banner.innerHTML = `<span>📍 <span class="region-name">${cityLabel}</span>${timeChip}${addressChip}</span>${chips}${warn?'<span style="color:var(--red);font-weight:700">⚠️ Manager confirmation required</span>':''}`;
+  banner.innerHTML = `<span>📍 <span class="region-name">${cityLabel}</span>${timeChip}</span>${chips}${warn?'<span style="color:var(--red);font-weight:700">⚠️ Manager confirmation required</span>':''}`;
   banner.style.display='flex';
 }
 
