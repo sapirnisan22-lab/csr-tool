@@ -3096,10 +3096,12 @@ function renderRegionBanner(){
   const tz = CITY_TZ[state.zipOrCity] || REGION_TZ[r] || null;
   let localTime = '';
   if(tz){ try{ localTime = new Intl.DateTimeFormat('en-US',{timeZone:tz,hour:'numeric',minute:'2-digit',hour12:true}).format(new Date()); }catch(e){} }
+  const OFFICE_ADDRESS = { boston: '74 Corey Rd, Brighton, MA 02135' };
   const cityLabel = state.zipOrCity || reg.displayName;
   const timeChip = localTime ? `<span style="font:600 13px/1 'DM Sans';color:var(--ink);background:rgba(255,255,255,0.6);border-radius:20px;padding:3px 10px">🕐 ${localTime}</span>` : '';
+  const addressChip = OFFICE_ADDRESS[r] ? `<span style="font:500 12px/1 'DM Sans';color:var(--ink-soft);background:rgba(255,255,255,0.6);border-radius:20px;padding:3px 10px">📬 ${OFFICE_ADDRESS[r]}</span>` : '';
   banner.className = 'region-banner' + (warn?' warn':'');
-  banner.innerHTML = `<span>📍 <span class="region-name">${cityLabel}</span>${timeChip}</span>${chips}${warn?'<span style="color:var(--red);font-weight:700">⚠️ Manager confirmation required</span>':''}`;
+  banner.innerHTML = `<span>📍 <span class="region-name">${cityLabel}</span>${timeChip}${addressChip}</span>${chips}${warn?'<span style="color:var(--red);font-weight:700">⚠️ Manager confirmation required</span>':''}`;
   banner.style.display='flex';
 }
 
